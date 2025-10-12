@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+.mySwiper .swiper-slide-thumb-active img {
+  transform: scale(0.95); /* بزرگ‌تر بشه */
+  transition: transform 0.3s ease; /* انیمیشن نرم */
+  border: 1px solid white;
+}
