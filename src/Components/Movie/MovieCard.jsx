@@ -16,7 +16,7 @@ import 'aos/dist/aos.css';
 export default function MovieCard({ title, children }) {
 
     useEffect(() => {
-        AOS.init({ duration: 1000, once: true , offset: 200 });
+        AOS.init({ duration: 800, once: true , offset: 120 });
     }, []);
 
     return (
