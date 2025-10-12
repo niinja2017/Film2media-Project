@@ -11,32 +11,57 @@ import 'swiper/css/thumbs';
 // import required modules
 import { FreeMode, Navigation, Thumbs, Autoplay } from 'swiper/modules';
 
+import caught from "./../../../Assets/Image/slider/05-3.jpg";
+import wallKingDead from "./../../../Assets/Image/slider/1the-walking-dead-daryl-dixon-seaso.jpg";
+import alien from "./../../../Assets/Image/slider/25g7mthXoJFcNZhAKz0evk17Bsx.webp";
+import alice from "./../../../Assets/Image/slider/2gFbvyd3gy1tXOBWgQQnYRnkI2B.jpg";
+import peacemarker from "./../../../Assets/Image/slider/G5Je3Q5OqsPtYoWFe8EhDvJ21F-scaled.jpg";
+import fantastic from "./../../../Assets/Image/slider/hBvaanw3RfMEs1m1blY7xwRXzul.jpg";
+import tulsaKing from "./../../../Assets/Image/slider/mNHRGO1gFpR2CYZdANe72kcKq7G.jpg";
+import marvelZombie from "./../../../Assets/Image/slider/ou1bLjE6ecN1sKA64aCYMKQQPqR.jpg";
+import genV from "./../../../Assets/Image/slider/ScaVfT5IkwVC3Edhmxqyl0GbK0.jpg";
+import darkWolf from "./../../../Assets/Image/slider/yQw23xxmVBFVHPCF6V68TAIIfno.jpg";
+
+// thumb image
+import caughtthumb from "./../../../Assets/Image/thumb/04-8-180x280.jpg";
+import wallKingDeadthumb from "./../../../Assets/Image/thumb/sP5QdW9FN18XWcA4ROz3MPAQBTx2-180x280.jpg";
+import alienthumb from "./../../../Assets/Image/thumb/22UuIMbiLoLFwgUKQLGfVaGdeaR-180x280.jpg";
+import alicethumb from "./../../../Assets/Image/thumb/20mOwAAPwZ1vLQkw0fvuQHiG7bO-180x280.jpg";
+import peacemarkerthumb from "./../../../Assets/Image/thumb/6UdyzOhmZUX186NEIFGm1Qhpnwq-180x280.jpg";
+import fantasticthumb from "./../../../Assets/Image/thumb/l8277LMyj9AkugkbmPRVO4B07yh-180x280.jpg";
+import tulsaKingthumb from "./../../../Assets/Image/thumb/zcYttxSeeZHQJiXdqyqc5QvydZr-180x280.jpg";
+import marvelZombiethumb from "./../../../Assets/Image/thumb/wofiHMsXxmp0lTafcBrgciSxBVx-180x280.jpg";
+import genVthumb from "./../../../Assets/Image/thumb/tEv842Nd5uMSavURG4aQO1pNtst-180x280.jpg";
+import darkWolfthumb from "./../../../Assets/Image/thumb/9mYeRoWguq5etbwJRdF8BXFKiF-180x280.jpg";
+
+
 export default function Slider() {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     const sliderImages = [
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/2gFbvyd3gy1tXOBWgQQnYRnkI2B.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2024/11/mNHRGO1gFpR2CYZdANe72kcKq7G.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/05-3.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/ou1bLjE6ecN1sKA64aCYMKQQPqR.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/1the-walking-dead-daryl-dixon-seaso.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2022/02/G5Je3Q5OqsPtYoWFe8EhDvJ21F-scaled.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/ScaVfT5IkwVC3Edhmxqyl0GbK0.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/08/25g7mthXoJFcNZhAKz0evk17Bsx.webp",
-        "https://www.f2mede.ir/wp-content/uploads/2025/08/yQw23xxmVBFVHPCF6V68TAIIfno.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/hBvaanw3RfMEs1m1blY7xwRXzul.jpg"
+        alice,
+        tulsaKing,
+        caught,
+        marvelZombie,
+        wallKingDead,
+        peacemarker,
+        genV,
+        alien,
+        darkWolf,
+        fantastic,
     ];
     const thumbImage = [
-        "https://www.f2mede.ir/wp-content/uploads/2022/12/20mOwAAPwZ1vLQkw0fvuQHiG7bO-180x280.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2024/11/zcYttxSeeZHQJiXdqyqc5QvydZr-180x280.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/04-8-180x280.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/wofiHMsXxmp0lTafcBrgciSxBVx-180x280.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2024/11/sP5QdW9FN18XWcA4ROz3MPAQBTx2-180x280.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2022/02/6UdyzOhmZUX186NEIFGm1Qhpnwq-180x280.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2023/11/tEv842Nd5uMSavURG4aQO1pNtst-180x280.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/22UuIMbiLoLFwgUKQLGfVaGdeaR-180x280.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/08/9mYeRoWguq5etbwJRdF8BXFKiF-180x280.jpg",
-        "https://www.f2mede.ir/wp-content/uploads/2025/09/l8277LMyj9AkugkbmPRVO4B07yh-180x280.jpg"
+        alicethumb,
+        tulsaKingthumb,
+        caughtthumb,
+        marvelZombiethumb,
+        wallKingDeadthumb,
+        peacemarkerthumb,
+        genVthumb,
+        alienthumb,
+        darkWolfthumb,
+        fantasticthumb,
+
     ]
 
     return (

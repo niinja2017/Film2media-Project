@@ -1,14 +1,14 @@
 // images
-import war2 from "./../../Assets/Image/tHUEGjexjpTDO3ggla9JQ6CojxU-180x280.webp";
-import Astronaut from "./../../Assets/Image/souvvkJHYhztC1UqZ8lEVUiJa3J-180x280.webp";
-import Adulthood from "./../../Assets/Image/a40Gi0Zq4Ecqu3obmOp6TSgEne1-180x280.webp";
-import UnderNinja from "./../../Assets/Image/48zyIwzJ6rBjsvBNzUl9wkWQ9dS-180x280.webp";
-import StolenGirl from "./../../Assets/Image/fZlNXEHZsBp7unqw009MeBbMv87-180x280.webp";
-import Steve from "./../../Assets/Image/wmLoMyofbseLfxiGgk1Iz5H97c3-180x280.webp";
-import FreakierFriday from "./../../Assets/Image/0111-180x280.jpg";
-import Rewrite from "./../../Assets/Image/022-180x280.jpg";
-import Wait from "./../../Assets/Image/uPcqiq0SQwsWYoRSbGDgtSN1gxD-180x280.webp";
-import LondonCalling from "./../../Assets/Image/cpQ4VxBJO7vGV3IUdKzSNf4tH9V-180x280.webp";
+import war2 from "./../../Assets/Image/content/tHUEGjexjpTDO3ggla9JQ6CojxU-180x280.webp";
+import Astronaut from "./../../Assets/Image/content/souvvkJHYhztC1UqZ8lEVUiJa3J-180x280.webp";
+import Adulthood from "./../../Assets/Image/content/a40Gi0Zq4Ecqu3obmOp6TSgEne1-180x280.webp";
+import UnderNinja from "./../../Assets/Image/content/48zyIwzJ6rBjsvBNzUl9wkWQ9dS-180x280.webp";
+import StolenGirl from "./../../Assets/Image/content/fZlNXEHZsBp7unqw009MeBbMv87-180x280.webp";
+import Steve from "./../../Assets/Image/content/wmLoMyofbseLfxiGgk1Iz5H97c3-180x280.webp";
+import FreakierFriday from "./../../Assets/Image/content/0111-180x280.jpg";
+import Rewrite from "./../../Assets/Image/content/022-180x280.jpg";
+import Wait from "./../../Assets/Image/content/uPcqiq0SQwsWYoRSbGDgtSN1gxD-180x280.webp";
+import LondonCalling from "./../../Assets/Image/content/cpQ4VxBJO7vGV3IUdKzSNf4tH9V-180x280.webp";
 
 import MovieCardItem from "./../../Components/Movie/MovieCardItem";
 import MovieCard from "../../Components/Movie/MovieCard";
