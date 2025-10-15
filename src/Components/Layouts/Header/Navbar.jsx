@@ -11,7 +11,7 @@ import UseSearchValue from "../../../Hooks/useSearchValue";
 import NavbarItem from "./NavbarItem";
 import Logo from "../../../Assets/Svg/Logo";
 
-export default function Navbar() {
+export default function Navbar({changePageHandler}) {
 
 
     const ListItemDetails = [
@@ -77,7 +77,7 @@ export default function Navbar() {
                         />
                     </div>
                 </div>
-                <a href="https://www.f2mede.ir/profile/" className="bg-[#96F207] p-3 xl:px-6 rounded-lg transition shadow hover:shadow-[#96F207]">
+                <a href="#" onClick={changePageHandler} className="bg-[#96F207] p-3 xl:px-6 rounded-lg transition shadow hover:shadow-[#96F207]">
                     <p className="text-[#1d1c21] font-medium">ورود/ثبت‌نام</p>
                 </a>
             </div>

@@ -5,12 +5,12 @@ import Slider from "../../Components/Ui/Slider/Slider";
 
 
 
-export default function Home() {
+export default function Home({changePageHandler}) {
     return (
         <>
             <Slider />
             <div className="pt-8 w-[85%] mx-auto absolute top-0 z-50 left-0 right-0">
-                <Navbar />
+                <Navbar changePageHandler={changePageHandler}/>
             </div>
             <Movie/>
             <Footer/>

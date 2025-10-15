@@ -2,7 +2,7 @@ import { useState } from "react"
 import InputFormLogin from "./InputFormLogin"
 import usePostForm from './../../Hooks/usePostForm'
 
-export default function FormLogin() {
+export default function FormLogin({changePageHandler}) {
 
     const [active, setActive] = useState('login')
 
@@ -105,7 +105,7 @@ export default function FormLogin() {
 
             </div>
             <div className="text-white">
-                <a href="#">بازگشت به صفحه اصلی</a>
+                <a href="#" onClick={changePageHandler}>بازگشت به صفحه اصلی</a>
             </div>
         </div>
     )
