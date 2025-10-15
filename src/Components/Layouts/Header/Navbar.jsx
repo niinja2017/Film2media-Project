@@ -44,16 +44,16 @@ export default function Navbar({ changePageHandler }) {
     },
   ];
 
-  // search states (همان الانت)
+  // search states
   const [search, setSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const searchValue = UseSearchValue(searchTerm, 1000);
 
   // states برای dropdown دسته‌بندی‌ها
-  const [catOpen, setCatOpen] = useState(false); // آیا منوی دسته‌بندی باز است؟
-  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0); // کدوم تایتل فعاله (کلیک شده)
+  const [catOpen, setCatOpen] = useState(false);
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
 
-  // ref برای نگهداری timeout (قابل پاک شدن)
+  // ref برای نگهداری timeout
   const closeTimeoutRef = useRef(null);
 
   const clickHandler = () => setSearch((s) => !s);
@@ -81,7 +81,7 @@ export default function Navbar({ changePageHandler }) {
     }
   };
 
-  // هنگام خروج، منو رو بعد از یک تأخیر کوتاه ببند
+  // هنگام خروج، منو رو بعد از یک تأخیر کوتاه می بنده
   const scheduleClose = (delay = 250) => {
     clearCloseTimeout();
     closeTimeoutRef.current = setTimeout(() => {
@@ -104,18 +104,18 @@ export default function Navbar({ changePageHandler }) {
 
         <ul className="items-center space-x-10 xl:flex hidden">
           {ListItemDetails.map((item, index) => {
-            // آیتمِ "دسته بندی ها" را جدا مدیریت می‌کنیم
+            //آیتم دسته بندی ها‌
             if (item.ListText === "دسته بندی ها") {
               return (
                 <li
                   key={index}
                   className={`relative ${item.style ?? ""}`}
-                  // وقتی موس وارد کل ناحیه شد: تایمر رو پاک و منو باز کن
+                  // وقتی موس وارد کل ناحیه شد: تایمر رو پاک و منو باز می شه
                   onMouseEnter={() => {
                     clearCloseTimeout();
                     setCatOpen(true);
                   }}
-                  // وقتی موس خارج شد برنامه‌ریزی کن که بعد از تاخیر منو بسته شود
+                  // وقتی موس خارج شد بعد تاخیر منو بسته می شه
                   onMouseLeave={() => scheduleClose(300)}
                 >
                   {/* خود لینک / دکمه */}
@@ -131,7 +131,6 @@ export default function Navbar({ changePageHandler }) {
 
                   {/* منوی دسته‌بندی */}
                   <div
-                    // مهم: به خود دراپ‌داون هم event ها اضافه کن تا وقتی موس داخلش هست تایمر پاک بشه
                     onMouseEnter={() => clearCloseTimeout()}
                     onMouseLeave={() => scheduleClose(300)}
                     className={`absolute right-0 top-[100%] mt-3 z-50 w-[1000px] rounded p-5 bg-black/50
@@ -181,7 +180,6 @@ export default function Navbar({ changePageHandler }) {
               );
             }
 
-            // سایر آیتم‌ها (عادی)
             return (
               <NavbarItem
                 key={index}
