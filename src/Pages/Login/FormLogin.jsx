@@ -1,62 +1,101 @@
 import { useState } from "react"
 import InputFormLogin from "./InputFormLogin"
-import usePostForm from './../../Hooks/usePostForm'
+import { Form, Formik } from "formik"
 
-export default function FormLogin({changePageHandler}) {
+export default function FormLogin({ changePageHandler }) {
 
     const [active, setActive] = useState('login')
 
-    // Login input
-    const NameInput = usePostForm('')
-    const PasswordInput = usePostForm('')
-    const CaptchaInput = usePostForm('')
-
-    // SignUp input
-    const signupNameInput = usePostForm('')
-    const signupPhoneInput = usePostForm('')
-    const signupEmailInput = usePostForm('')
-    const signupPasswordInput = usePostForm('')
-    const signupPasswordAgainInput = usePostForm('')
-    const signupCodeInput = usePostForm('')
-
-
-    const loginSubmitHandler = async (evnet) => {
-        evnet.preventDefault()
-        const data = {
-            Name: NameInput?.value,
-            Password: PasswordInput?.value,
-            Code: CaptchaInput?.value,
-        }
-
-        let res = await fetch('https://68c7e9885d8d9f5147338df4.mockapi.io/posts', {
+    const loginSubmitHandler = async (values) => {
+        let res = await fetch('https://68c7e9885d8d9f5147338df4.mockapi.io/Login', {
             method: 'post',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(values)
+        })
+        res = await res.json()
+        console.log(values)
+        console.log(res)
+    }
+    const signupSubmitHandler = async (values) => {
+        let res = await fetch('https://68c7e9885d8d9f5147338df4.mockapi.io/SignUp', {
+            method: 'post',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(values)
         })
         res = await res.json()
         console.log(res)
+        console.log(values)
     }
-    const signupSubmitHandler = async (evnet) => {
-        evnet.preventDefault()
-        const data = {
-            Name: signupNameInput?.value,
-            Phone: signupPhoneInput?.value,
-            Eamil: signupEmailInput?.value,
-            Password: signupPasswordInput?.value,
-            Password2: signupPasswordAgainInput?.value,
-            Code: signupCodeInput?.value,
+    const validateSignUP = (values) => {
+        const errors = {}
+
+        // userName
+        if (!values.userName || !values.userName.trim()) {
+            errors.userName = 'نام کاربری الزامی است'
+        } else if (values.userName.length < 2) {
+            errors.userName = 'نام کاربری باید حداقل 2 کاراکتر باشد'
         }
 
-        let res = await fetch('https://68c7e9885d8d9f5147338df4.mockapi.io/posts', {
-            method: 'post',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        res = await res.json()
-        console.log(res)
+        // Email (ریجکس عمومی و ایمن برای ایمیل)
+        if (!values.Email || !values.Email.trim()) {
+            errors.Email = 'ایمیل الزامی است'
+        } else {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            if (!emailRegex.test(values.Email)) {
+                errors.Email = 'ایمیل معتبر نیست (مثال: example@gmail.com)'
+            }
+        }
+
+        // Phone (فرمت ایران: 11 رقم و با 09 شروع)
+        if (!values.Phone || !values.Phone.trim()) {
+            errors.Phone = 'شماره تلفن الزامی است'
+        } else if (!/^09\d{9}$/.test(values.Phone)) {
+            errors.Phone = 'شماره تلفن باید معتبر و ۱۱ رقم باشد'
+        }
+
+        // Password
+        if (!values.Password || !values.Password.trim()) {
+            errors.Password = 'رمز عبور الزامی است'
+        } else if (values.Password.length < 8) {
+            errors.Password = 'رمز عبور باید حداقل ۸ کاراکتر باشد'
+        }
+
+        // Password2
+        if (!values.Password2 || !values.Password2.trim()) {
+            errors.Password2 = 'تکرار رمز عبور الزامی است'
+        } else if (values.Password2 !== values.Password) {
+            errors.Password2 = 'تکرار رمز عبور با رمز عبور مطابقت ندارد'
+        }
+
+        // SecurityCode
+        if (!values.SecurityCode || !values.SecurityCode.trim()) {
+            errors.SecurityCode = 'کد امنیتی الزامی است'
+        }
+
+        return errors
     }
 
 
+    const validateLogin = (values) => {
+        let errors = {}
+        if (!values.userName.trim()) {
+            errors.userName = 'لطفا فیلد نام کاربری را وارد کنید'
+        } else if (values.userName.length < 2) {
+            errors.userName = 'نام کاربری باید حداقل 2 کاراکتر باشد'
+        }
+
+        if (!values.Password.trim()) {
+            errors.Password = 'لطفا پسورد خود را وارد کنید'
+        } else if (values.Password.length < 7) {
+            errors.Password = 'پسور باید بیشتر از 7 کاراکتر داشته باشد'
+        }
+
+        if (!values.SecurityCode.trim()) {
+            errors.SecurityCode = 'لطفا کد امنیتی را وارد کنید'
+        }
+
+        return errors
+    }
     return (
         <div className="flex flex-col space-y-5 items-center justify-center h-screen w-full bg-[#0D0D0D]">
             <div className="flex flex-col bg-[#1D1C21] w-[95%] sm:w-[80%] lg:w-[45%] xl:w-[35%] 2xl:w-[30%]  p-14 rounded-2xl space-y-5">
@@ -69,37 +108,60 @@ export default function FormLogin({changePageHandler}) {
                 </div>
                 {active === 'login'
                     ?
-                    <form onSubmit={loginSubmitHandler} action="" className="space-y-5">
-                        <InputFormLogin initialValue={NameInput} InputType='text' TitleLabel='نام کاربری' styleWidth='w-full' />
-                        <InputFormLogin initialValue={PasswordInput} InputType='password' TitleLabel='رمز عبور' styleWidth='w-full' />
-                        <div className="flex space-x-3">
-                            <InputFormLogin initialValue={CaptchaInput} InputType='text' TitleLabel='کد امنیتی' styleWidth='w-[70%]' />
-                            <button type="submit" className="w-[30%] cursor-pointer">
-                                <img src="https://www.f2mede.ir/captcha.php?w=150&amp;h=50" alt="کپچا" width="150" height="50" className="w-full h-full rounded-xl" />
-                            </button>
-                        </div>
-                        <button className="cursor-pointer w-full text-[#1d1c21] bg-[#96F207] px-3 py-5 hover:shadow hover:shadow-[#96F207] font-bold rounded-xl">ورود به حساب</button>
-                        <div className="flex justify-center">
-                            <a href="" className="text-[#979797]">رمز عبورم را فراموش کرده‌ام</a>
-                        </div>
-                    </form>
+                    <Formik
+                        initialValues={{
+                            userName: '',
+                            Password: '',
+                            SecurityCode: '',
+                        }}
+                        validate={validateLogin}
+                        onSubmit={loginSubmitHandler}
+                    >
+                        <Form className="space-y-5">
+                            <InputFormLogin name='userName' InputType='text' TitleLabel='نام کاربری' styleWidth='w-full' />
+                            <InputFormLogin name='Password' InputType='password' TitleLabel='رمز عبور' styleWidth='w-full' />
+                            <div className="flex space-x-3">
+                                <InputFormLogin name='SecurityCode' InputType='text' TitleLabel='کد امنیتی' styleWidth='w-[70%]' />
+                                <button className="w-[30%] cursor-pointer">
+                                    <img src="https://www.f2mede.ir/captcha.php?w=150&amp;h=50" alt="کپچا" width="150" height="50" className="w-full h-full rounded-xl" />
+                                </button>
+                            </div>
+                            <button type="submit" className="cursor-pointer w-full text-[#1d1c21] bg-[#96F207] px-3 py-5 hover:shadow hover:shadow-[#96F207] font-bold rounded-xl">ورود به حساب</button>
+                            <div className="flex justify-center">
+                                <a href="" className="text-[#979797]">رمز عبورم را فراموش کرده‌ام</a>
+                            </div>
+                        </Form>
+                    </Formik>
                     :
-                    <form onSubmit={signupSubmitHandler} action="" className="space-y-5">
-                        <InputFormLogin initialValue={signupNameInput} InputType='text' TitleLabel='نام کاربری' styleWidth='w-full' />
-                        <InputFormLogin initialValue={signupPhoneInput} InputType='text' TitleLabel='تلفن همراه' styleWidth='w-full' />
-                        <InputFormLogin initialValue={signupEmailInput} InputType='email' TitleLabel='ایمیل شما' styleWidth='w-full' />
-                        <div className="flex space-x-3">
-                            <InputFormLogin initialValue={signupPasswordInput} InputType='password' TitleLabel='رمز عبور' styleWidth='w-[50%]' />
-                            <InputFormLogin initialValue={signupPasswordAgainInput} InputType='password' TitleLabel='تکرار رمز عبور' styleWidth='w-[50%]' />
-                        </div>
-                        <div className="flex space-x-3">
-                            <InputFormLogin initialValue={signupCodeInput} InputType='text' TitleLabel='کد امنیتی' styleWidth='w-[70%]' />
-                            <button type="submit" className="w-[30%] cursor-pointer">
-                                <img src="https://www.f2mede.ir/captcha.php?w=150&amp;h=50" alt="کپچا" width="150" height="50" className="w-full h-full rounded-xl" />
-                            </button>
-                        </div>
-                        <button className="cursor-pointer w-full text-[#1d1c21] bg-[#96F207] px-3 py-5 hover:shadow hover:shadow-[#96F207] font-bold rounded-xl">ثبت نام و ورود</button>
-                    </form>
+                    <Formik
+                        initialValues={{
+                            userName: '',
+                            Phone: '',
+                            Email: '',
+                            Password: '',
+                            Password2: '',
+                            SecurityCode: '',
+                        }}
+                        validate={validateSignUP}
+                        onSubmit={signupSubmitHandler}
+                    >
+                        <Form className="space-y-5">
+                            <InputFormLogin name='userName' InputType='text' TitleLabel='نام کاربری' styleWidth='w-full' />
+                            <InputFormLogin name='Phone' InputType='text' TitleLabel='تلفن همراه' styleWidth='w-full' />
+                            <InputFormLogin name='Email' InputType='email' TitleLabel='ایمیل شما' styleWidth='w-full' />
+                            <div className="flex space-x-3">
+                                <InputFormLogin name='Password' InputType='password' TitleLabel='رمز عبور' styleWidth='w-[50%]' />
+                                <InputFormLogin name='Password2' InputType='password' TitleLabel='تکرار رمز عبور' styleWidth='w-[50%]' />
+                            </div>
+                            <div className="flex space-x-3">
+                                <InputFormLogin name='SecurityCode' InputType='text' TitleLabel='کد امنیتی' styleWidth='w-[70%]' />
+                                <button className="w-[30%] cursor-pointer">
+                                    <img src="https://www.f2mede.ir/captcha.php?w=150&amp;h=50" alt="کپچا" width="150" height="50" className="w-full h-full rounded-xl" />
+                                </button>
+                            </div>
+                            <button type="submit" className="cursor-pointer w-full text-[#1d1c21] bg-[#96F207] px-3 py-5 hover:shadow hover:shadow-[#96F207] font-bold rounded-xl">ثبت نام و ورود</button>
+                        </Form>
+                    </Formik>
                 }
 
 
