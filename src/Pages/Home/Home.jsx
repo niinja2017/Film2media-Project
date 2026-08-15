@@ -1,7 +1,7 @@
-import Footer from "../../Components/Layouts/Footer/Footer";
-import Navbar from "../../Components/layouts/Header/Navbar";
-import Movie from "../../Components/Movie/Movie";
-import Slider from "../../Components/Ui/Slider/Slider";
+import Footer from "./../../Components/Layouts/Footer/Footer";
+import Navbar from "./../../Components/Layouts/Header/Navbar";
+import Movie from "./../../Components/Movie/Movie";
+import Slider from "./../../Components/Ui/Slider/Slider";
 
 
 
