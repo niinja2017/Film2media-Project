@@ -7,24 +7,18 @@ export default function FormLogin({ changePageHandler }) {
     const [active, setActive] = useState('login')
 
     const loginSubmitHandler = async (values) => {
-        let res = await fetch('https://68c7e9885d8d9f5147338df4.mockapi.io/Login', {
+        await fetch('https://68c7e9885d8d9f5147338df4.mockapi.io/Login', {
             method: 'post',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(values)
         })
-        res = await res.json()
-        console.log(values)
-        console.log(res)
     }
     const signupSubmitHandler = async (values) => {
-        let res = await fetch('https://68c7e9885d8d9f5147338df4.mockapi.io/SignUp', {
+        await fetch('https://68c7e9885d8d9f5147338df4.mockapi.io/SignUp', {
             method: 'post',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(values)
         })
-        res = await res.json()
-        console.log(res)
-        console.log(values)
     }
     const validateSignUP = (values) => {
         const errors = {}
